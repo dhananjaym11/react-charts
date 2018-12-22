@@ -1,25 +1,70 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './bootstrap.css';
+import Circle from './charts/CIrcle';
+import Donut from './charts/Donut';
+import Bar from './charts/Bar';
+import Pipe from './charts/Pipe';
+import Line from './charts/Line';
+import DoubleBarchart from './charts/DoubleBar';
+
+const dataBar = [
+  { "type": "Web", "value": 25 },
+  { "type": "Email", "value": 60 },
+  { "type": "URL", "value": 8 },
+  { "type": "C2", "value": 45 },
+  { "type": "SMB", "value": 30 }
+]
+
+const dataDoubleBar = [
+  [25, 10],
+  [60, 80],
+  [10, 50]
+]
+
+const dataDonut = [35, 20, 30, 15];
+
+const dataPipe = [35, 20, 30, 15];
+
+var dataLine = [{
+  date: "1",
+  close: "44"
+}, {
+  date: "2",
+  close: "20"
+}, {
+  date: "3",
+  close: "100"
+}, {
+  date: "4",
+  close: "37"
+}, {
+  date: "5",
+  close: "59"
+}];
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="App container-fluid">
+        <div>
+          <Circle width={500} height={500} data={dataDonut} />
+        </div>
+        <div>
+          <Donut width={500} height={500} data={dataDonut} />
+        </div>
+        <div>
+          <Pipe width={500} height={300} data={dataPipe} />
+        </div>
+        <div>
+          <Bar width={500} height={150} data={dataBar} />
+        </div>
+        <div>
+          <DoubleBarchart width={500} height={150} data={dataDoubleBar} />
+        </div>
+        <div>
+          <Line width={600} height={300} data={dataLine} />
+        </div>
       </div>
     );
   }
