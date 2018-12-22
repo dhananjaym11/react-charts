@@ -33,17 +33,23 @@ class Circlechart extends Component {
             .attr('width', width)
             .attr('height', height)
 
-        d3.select(node)
+        const arcs = d3.select(node)
             .append("g")
+            .attr("class", "slice")
             .attr("transform", `translate(${width / 2}, ${height / 2})`)
             .selectAll('.arc')
             .data(pie(data))
             .enter()
-            .append('path')
+            .append('g')
+
+        arcs.append('path')
             .attr("d", arc)
-            .style("fill", function (d, i) {
-                return color[i]
-            });
+            .style("fill", (d, i) => color[i]);
+
+        arcs.append('text')
+            .attr("transform", (d) => (`translate(${arc.centroid(d)})`))
+            .attr("text-anchor", "middle")
+            .text((d, i) => data[i]);
     }
 
     render() {

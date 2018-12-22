@@ -29,14 +29,14 @@ class Donutchart extends Component {
             .innerRadius(radius)
             .outerRadius(radius - 50)
 
-        d3.select(node)
+        const svg = d3.select(node)
             .attr('width', width)
             .attr('height', height)
 
-        d3.select(node)
-            .append("g")
+        const g = svg.append("g")
             .attr("transform", `translate(${width / 2}, ${height / 2})`)
-            .selectAll('.arc')
+
+        g.selectAll('.arc')
             .data(pie(data))
             .enter()
             .append('path')
@@ -44,6 +44,12 @@ class Donutchart extends Component {
             .style("fill", function (d, i) {
                 return color[i]
             });
+
+        g.append("text")
+            .attr("text-anchor", "middle")
+            .attr('font-size', '4em')
+            .attr('y', 20)
+            .text('test');
     }
 
     render() {

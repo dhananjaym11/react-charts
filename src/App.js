@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import './bootstrap.css';
+import Needle from './charts/Needle';
 import Circle from './charts/CIrcle';
 import Donut from './charts/Donut';
 import Bar from './charts/Bar';
@@ -21,6 +22,10 @@ const dataDoubleBar = [
   [60, 80],
   [10, 50]
 ]
+
+const dataNeedle = [35, 20, 20, 15];
+
+const dataCircle = [35, 20, 30, 15];
 
 const dataDonut = [35, 20, 30, 15];
 
@@ -47,8 +52,11 @@ class App extends Component {
   render() {
     return (
       <div className="App container-fluid">
+        <div >
+          <Needle width={500} height={280} data={dataNeedle} />
+        </div>
         <div>
-          <Circle width={500} height={500} data={dataDonut} />
+          <Circle width={500} height={500} data={dataCircle} />
         </div>
         <div>
           <Donut width={500} height={500} data={dataDonut} />
