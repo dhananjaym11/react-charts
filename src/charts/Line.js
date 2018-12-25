@@ -28,9 +28,9 @@ class Barchart extends Component {
         var xScale = d3.scaleLinear().range([0, newWidth]).domain([1, d3.max(data, d => d.date)]);
         var yScale = d3.scaleLinear().range([newHeight, 0]).domain([0, d3.max(data, d => d.close)]);
 
-        // const bodyTooltip = d3.select("body").append("div")	
-        // .attr("class", "tooltip")				
-        // .style("opacity", 0);
+        const bodyTooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
 
         const svg = d3.select(node)
             .attr('width', width)
@@ -45,30 +45,33 @@ class Barchart extends Component {
 
         svg.append("path").datum(data).attr("d", valueline(data));
 
-        const tooltip = svg.append("g")
-            .style("display", "none");
+        // const tooltip = svg.append("g")
+        //     .style("display", "none");
 
-        svg.append("g").selectAll(".dot")       // dots
+        const circle = svg.append("g")      // dots
+            .selectAll(".dot")
             .data(data)
             .enter()
             .append("circle")
             .attr("cx", (d, i) => xScale(d.date))
             .attr("cy", (d) => yScale(d.close))
-            .attr("r", 5)
-            .on("mouseover", (d) => {
-                tooltip.style("display", null)
-                    .append('text')
-                    .text(d.close)
-                    .attr('x', xScale(d.date))
-                    .attr('y', yScale(d.close))
-                    .attr('dx', '-7')
-                    .attr('dy', '-7')
-            })
-            .on("mouseout", () => {
-                tooltip.style("display", "none")
-                    .selectAll('text')
-                    .remove();
-            })
+            .attr("r", 5);
+
+        circle.on("mouseover", (d, i) => {
+            circle._groups[0][i].style.fill = 'red';
+            bodyTooltip.transition()
+                .duration(200)
+                .style("opacity", .9);
+            bodyTooltip.html(d.close)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 35) + "px");
+        })
+        circle.on("mouseout", (d, i) => {
+            circle._groups[0][i].style.fill = 'black';
+            bodyTooltip.transition()
+                .duration(500)
+                .style("opacity", 0)
+        })
 
         svg.append("g") // Add the X Axis
             .attr("class", "x axis")

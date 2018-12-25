@@ -23,3 +23,10 @@ path {
     fill: transparent;
     stroke: #333;
 }
+.tooltip {
+    background: lightsteelblue;
+    width: 60px;
+    height: 28px;
+    padding: 2px;
+    text-align: center;
+}
