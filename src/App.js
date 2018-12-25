@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import LinearBubbleChart from 'react-linear-bubble-charts'
+
 import './App.css';
 import './bootstrap.css';
 import Needle from './charts/Needle';
@@ -8,6 +10,30 @@ import Bar from './charts/Bar';
 import Pipe from './charts/Pipe';
 import Line from './charts/Line';
 import DoubleBarchart from './charts/DoubleBar';
+import MyLinearBubbleChart from './charts/bubble';
+
+const dataBubble = [
+  {
+    title: "A",
+    value: 5,
+    color: "red"
+  },
+  {
+    title: "B",
+    value: 20,
+    color: "yellow"
+  },
+  {
+    title: "C",
+    value: 10,
+    color: "green"
+  },
+  {
+    title: "D",
+    value: 30,
+    color: "blue"
+  }
+]
 
 const dataBar = [
   { "type": "Web", "value": 25 },
@@ -52,6 +78,12 @@ class App extends Component {
   render() {
     return (
       <div className="App container-fluid">
+        <div>
+          <LinearBubbleChart height={200} data={dataBubble} />
+        </div>
+        <div>
+          <MyLinearBubbleChart height={200} data={dataBubble} />
+        </div>
         <div >
           <Needle width={500} height={280} data={dataNeedle} />
         </div>
