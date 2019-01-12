@@ -11,6 +11,7 @@ import Pipe from './charts/Pipe';
 import Line from './charts/Line';
 import DoubleBarchart from './charts/DoubleBar';
 import MyLinearBubbleChart from './charts/bubble';
+import MultiLinechart from './charts/MultiLine';
 
 const dataBubble = [
   {
@@ -74,6 +75,39 @@ var dataLine = [{
   close: "59"
 }];
 
+var dataMultiLine = [
+  {
+    name: "USA",
+    values: [
+      { date: "2000", price: "100" },
+      { date: "2001", price: "110" },
+      { date: "2002", price: "145" },
+      { date: "2003", price: "241" },
+      { date: "2004", price: "101" },
+    ]
+  },
+  {
+    name: "Canada",
+    values: [
+      { date: "2000", price: "200" },
+      { date: "2001", price: "120" },
+      { date: "2002", price: "33" },
+      { date: "2003", price: "21" },
+      { date: "2004", price: "51" },
+    ]
+  },
+  {
+    name: "Maxico",
+    values: [
+      { date: "2000", price: "50" },
+      { date: "2001", price: "10" },
+      { date: "2002", price: "5" },
+      { date: "2003", price: "71" },
+      { date: "2004", price: "20" },
+    ]
+  }
+];
+
 class App extends Component {
   render() {
     return (
@@ -104,6 +138,9 @@ class App extends Component {
         </div>
         <div>
           <Line width={600} height={300} data={dataLine} />
+        </div>
+        <div>
+          <MultiLinechart width={600} height={300} data={dataMultiLine} />
         </div>
       </div>
     );
