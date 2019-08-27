@@ -30,7 +30,7 @@ class LinearBubbleChart extends Component {
 
                             <text x={50 + i * newBubbleSpacing} y={newHeight / 2 + 50} textAnchor="middle">{d.title}</text>
 
-                            <text x={50 + i * newBubbleSpacing} y={newHeight / 2 - d.value - 12} text-anchor="middle">{d.value}</text>
+                            <text x={50 + i * newBubbleSpacing} y={newHeight / 2 - d.value - 12} textAnchor="middle">{d.value}</text>
                         </g>
                     )
                 })}
