@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as d3 from 'd3';
 
 class LinearBubbleChart extends Component {
 
@@ -8,16 +9,15 @@ class LinearBubbleChart extends Component {
     componentDidUpdate() {
     }
 
-    createchart() {
-        const node = this.node;
-        const { data } = this.props;
-    }
-
     render() {
-        const { width, height, data, bubbleSpacing } = this.props;
+        const { height, data, bubbleSpacing } = this.props;
         const newBubbleSpacing = bubbleSpacing ? bubbleSpacing : 90;
         const newHeight = height ? height : 300;
-        const newWidth = data.length * newBubbleSpacing + 100;
+        const newWidth = data.length * newBubbleSpacing + 50;
+
+        let x = d3.scaleLinear()
+            .range([12, 35])
+            .domain([d3.min(data, d => d.value), d3.max(data, d => d.value)]);
 
         return (
             <svg width={newWidth} height={newHeight}>
@@ -26,11 +26,11 @@ class LinearBubbleChart extends Component {
                 {data.map((d, i) => {
                     return (
                         <g key={i}>
-                            <circle cx={50 + i * newBubbleSpacing} cy={newHeight / 2} r={d.value} fill={d.color} />
+                            <circle cx={50 + i * newBubbleSpacing} cy={newHeight / 2} r={x(d.value)} fill={d.color} />
 
-                            <text x={45 + i * newBubbleSpacing} y={newHeight / 2 + 50} width="50">{d.title}</text>
+                            <text x={50 + i * newBubbleSpacing} y={newHeight / 2 + 50} textAnchor="middle">{d.title}</text>
 
-                            <text x={45 + i * newBubbleSpacing} y={newHeight / 2 - d.value - 20} width="50">{d.value}</text>
+                            <text x={50 + i * newBubbleSpacing} y={newHeight / 2 - d.value - 12} textAnchor="middle">{d.value}</text>
                         </g>
                     )
                 })}
