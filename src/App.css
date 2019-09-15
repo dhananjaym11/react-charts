@@ -30,3 +30,11 @@ path {
     padding: 2px;
     text-align: center;
 }
+.area-line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+.area {
+  fill: lightsteelblue;
+}

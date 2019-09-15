@@ -12,6 +12,7 @@ import Line from './charts/Line';
 import DoubleBarchart from './charts/DoubleBar';
 import MyLinearBubbleChart from './charts/bubble';
 import MultiLinechart from './charts/MultiLine';
+import Areachart from './charts/Area';
 
 const dataBubble = [
   {
@@ -108,6 +109,10 @@ var dataMultiLine = [
   }
 ];
 
+const dataArea = [
+  {x:0,y:12}, {x:10,y:21}, {x:20,y:18}, {x:30,y:7}, {x:40,y:15}
+]
+
 class App extends Component {
   render() {
     return (
@@ -141,6 +146,9 @@ class App extends Component {
         </div>
         <div>
           <MultiLinechart width={600} height={300} data={dataMultiLine} />
+        </div>
+        <div>
+          <Areachart width={240} height={240} data={dataArea} />
         </div>
       </div>
     );
