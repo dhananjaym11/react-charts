@@ -29,19 +29,22 @@ class StackedBarchart extends Component {
             const obj = { x: item.x, y: [] };
             item.y.forEach((d, i) => {
                 let sum = 0;
-                for (let j = 0; j < i; j++) {
+                for (let j = 0; j <= i; j++) {
                     sum += item.y[j]
                 }
                 obj.y.push({ 'yValue': d, 'ySum': sum });
             })
             newData.push(obj);
         });
-        console.log(newData);
 
-        const scaleX = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d.x)])
-            .range([0, newWidth]);
-        var scaleY = d3.scaleLinear()
+        const scaleX = d3.scaleBand()
+            .domain(data.map(d => d.x))
+            .range([0, newWidth])
+            .padding(0.3);
+        var scaleYValue = d3.scaleLinear()
+            .domain([0, d3.max(newData, d => d3.max(d.y, d => d.ySum))])
+            .range([0, newHeight]);
+        var scaleYSum = d3.scaleLinear()
             .domain([0, d3.max(newData, d => d3.max(d.y, d => d.ySum))])
             .range([newHeight, 0]);
 
@@ -63,11 +66,10 @@ class StackedBarchart extends Component {
             .data(d => d.y)
             .enter()
             .append('rect')
-            .attr('width', 20)
-            .attr('height', d => scaleY(d.yValue))
+            .attr('width', scaleX.bandwidth())
+            .attr('height', d => scaleYValue(d.yValue))
             .attr('x', 0)
-            // .attr('x', d => scaleX(d.x))
-            .attr('y', d => scaleY(d.ySum))
+            .attr('y', d => scaleYSum(d.ySum))
             .attr('fill', (d, i) => color[i])
 
         // X Axis
@@ -79,7 +81,7 @@ class StackedBarchart extends Component {
         // Y Axis
         g.append("g")
             .attr("class", "y-axis")
-            .call(d3.axisLeft(scaleY));
+            .call(d3.axisLeft(scaleYSum));
     }
 
     render() {
@@ -88,100 +90,3 @@ class StackedBarchart extends Component {
 }
 
 export default StackedBarchart;
-
-/*
-
-<div id="container"></div>
-<script>
-const data = [
-	[80, 20, 50],
-    [30, 100, 60],
-    [50, 10, 20]
-];
-const newData = data.map(item=> {
-	return item.map((d,i)=> {
-    	let sum = 0;
-    	for(let j=0; j<=i;j++) {
-        	sum += item[j]
-        }
-    	return {'y': d, 'y0': sum }
-    })
-});
-const color = ['red', 'blue', 'green']
-const scale = d3.scaleLinear()
-            .domain([d3.min(data), d3.max(data)])
-            .range([50, 200]);
-
-var y = d3.scaleLinear()
-  .domain([0, d3.max(newData, d=>d3.max(d,d=>d.y0))])
-  .range([0, 200]);
-
-const g = d3.select('#container')
-		.append('svg')
-        .attr('width', data.length*30 + 100)
-        .attr('height', 250)
-        .append('g')
-        .attr('transform', 'translate(20, 20)');
-
-const rectG = g.selectAll('g')
-  .data(newData)
-  .enter()
-  .append('g')
-  .attr('transform', (d, i) => 'translate('+i*30+',0)');
-
-const rect = rectG.selectAll('rect')
-  .data(d=>d)
-  .enter()
-  .append('rect')
-  .attr('width', 20)
-  .attr('height', d=> y(d.y))
-  .attr('x', 0)
-  .attr('y', d=> 200-y(d.y0 ))
-  .attr('fill',(d,i)=>color[i])
-</script>
-
----------------
-
-    createchart() {
-        const node = this.node;
-        const { height, data } = this.props;
-        const color = ["#91cf60", "#d9ef8b", "#fee08b", "#fc8d59", "#d73027"];
-
-        const newData = data.map(item => {
-            return item.map((d, i) => {
-                let sum = 0;
-                for (let j = 0; j <= i; j++) {
-                    sum += item[j]
-                }
-                return { 'y': d, 'y0': sum }
-            })
-        });
-
-        var y = d3.scaleLinear()
-            .domain([0, d3.max(newData, d => d3.max(d, d => d.y0))])
-            .range([0, 200]);
-
-        const g = d3.select(node)
-            .attr('width', data.length * 30 + 30)
-            .attr('height', height)
-            .append('g')
-            .attr('transform', 'translate(20, 20)');
-
-        const rectG = g.selectAll('g')
-            .data(newData)
-            .enter()
-            .append('g')
-            .attr('transform', (d, i) => 'translate(' + i * 30 + ',0)');
-
-        // rect
-        rectG.selectAll('rect')
-            .data(d => d)
-            .enter()
-            .append('rect')
-            .attr('width', 20)
-            .attr('height', d => y(d.y))
-            .attr('x', 0)
-            .attr('y', d => 200 - y(d.y0))
-            .attr('fill', (d, i) => color[i])
-    }
-*/

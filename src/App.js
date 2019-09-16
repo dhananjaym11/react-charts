@@ -159,7 +159,7 @@ class App extends Component {
           <Areachart width={300} height={300} data={dataArea} />
         </div>
         <div>
-          <StackedBarchart width={200} height={300} data={dataStackedBar} />
+          <StackedBarchart width={250} height={300} data={dataStackedBar} />
         </div>
         <div>
           <MirrorLinechart width={600} height={600} data={dataMirrorLine} />
