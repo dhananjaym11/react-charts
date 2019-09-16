@@ -43,7 +43,10 @@ class Barchart extends Component {
             .y((d) => yScale(d.close))
             .curve(d3.curveMonotoneX);
 
-        svg.append("path").datum(data).attr("d", valueline(data));
+        svg.append("path")
+            .datum(data)
+            .attr("d", valueline(data))
+            .attr("class", "line");
 
         // const tooltip = svg.append("g")
         //     .style("display", "none");
@@ -55,10 +58,11 @@ class Barchart extends Component {
             .append("circle")
             .attr("cx", (d, i) => xScale(d.date))
             .attr("cy", (d) => yScale(d.close))
-            .attr("r", 5);
+            .attr("r", 5)
+            .attr('fill', 'steelblue');
 
         circle.on("mouseover", (d, i) => {
-            circle._groups[0][i].style.fill = 'red';
+            circle._groups[0][i].style.fill = 'rgb(209, 89, 96)';
             bodyTooltip.transition()
                 .duration(200)
                 .style("opacity", .9);
@@ -67,7 +71,7 @@ class Barchart extends Component {
                 .style("top", (d3.event.pageY - 35) + "px");
         })
         circle.on("mouseout", (d, i) => {
-            circle._groups[0][i].style.fill = 'black';
+            circle._groups[0][i].style.fill = 'steelblue';
             bodyTooltip.transition()
                 .duration(500)
                 .style("opacity", 0)
