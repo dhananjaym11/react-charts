@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 
-class Barchart extends Component {
+class Pipechart extends Component {
     constructor(props) {
         super(props);
         this.createchart = this.createchart.bind(this);
@@ -29,11 +29,11 @@ class Barchart extends Component {
 
         const arc = d3.arc()
             .innerRadius(radius)
-            .outerRadius(radius-50)
+            .outerRadius(radius - 50)
 
         d3.select(node)
-        .attr('width',width)
-        .attr('height',height)
+            .attr('width', width)
+            .attr('height', height)
 
         d3.select(node)
             .append("g")
@@ -53,4 +53,4 @@ class Barchart extends Component {
     }
 }
 
-export default Barchart;
+export default Pipechart;

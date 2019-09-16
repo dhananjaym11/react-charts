@@ -14,6 +14,7 @@ import MyLinearBubbleChart from './charts/bubble';
 import MultiLinechart from './charts/MultiLine';
 import Areachart from './charts/Area';
 import StackedBarchart from './charts/StackedBar';
+import MirrorLinechart from './charts/MirrorLine';
 
 const dataBubble = [
   {
@@ -60,24 +61,15 @@ const dataDonut = [35, 20, 30, 15];
 
 const dataPipe = [35, 20, 30, 15];
 
-var dataLine = [{
-  date: "1",
-  close: "44"
-}, {
-  date: "2",
-  close: "20"
-}, {
-  date: "3",
-  close: "100"
-}, {
-  date: "4",
-  close: "37"
-}, {
-  date: "5",
-  close: "59"
-}];
+const dataLine = [
+  { date: "1", close: "44" },
+  { date: "2", close: "20" },
+  { date: "3", close: "100" },
+  { date: "4", close: "37" },
+  { date: "5", close: "59" }
+];
 
-var dataMultiLine = [
+const dataMultiLine = [
   {
     name: "USA",
     values: [
@@ -120,6 +112,14 @@ const dataStackedBar = [
   [50, 10, 20]
 ];
 
+const dataMirrorLine = [
+  { x: "1", y0: "44", y1: "10" },
+  { x: "2", y0: "20", y1: "65" },
+  { x: "3", y0: "100", y1: "55" },
+  { x: "4", y0: "37", y1: "40" },
+  { x: "5", y0: "59", y1: "45" }
+];
+
 class App extends Component {
   render() {
     return (
@@ -159,6 +159,9 @@ class App extends Component {
         </div>
         <div>
           <StackedBarchart height={240} data={dataStackedBar} />
+        </div>
+        <div>
+          <MirrorLinechart width={600} height={600} data={dataMirrorLine} />
         </div>
       </div>
     );
