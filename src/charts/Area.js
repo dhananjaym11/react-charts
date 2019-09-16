@@ -19,15 +19,19 @@ class Areachart extends Component {
         const node = this.node;
         const { width, height, data } = this.props;
 
+        const margin = { top: 30, right: 20, bottom: 30, left: 50 };
+        const newWidth = width - margin.left - margin.right;
+        const newHeight = height - margin.top - margin.bottom;
+
         const scaleX = d3.scaleLinear()
-            .domain([d3.min(data, d => d.x), d3.max(data, d => d.x)])
-            .range([0, 200]);
+            .domain([0, d3.max(data, d => d.x)])
+            .range([0, newWidth]);
         const scaleY = d3.scaleLinear()
-            .domain([d3.min(data, d => d.y), d3.max(data, d => d.y)])
-            .range([150, 0]);
+            .domain([0, d3.max(data, d => d.y)])
+            .range([newHeight, 0]);
         var area = d3.area()
             .x(d => scaleX(d.x))
-            .y0(200)
+            .y0(newHeight)
             .y1(d => scaleY(d.y));
         const valueline = d3.line()
             .x(d => scaleX(d.x))
@@ -38,7 +42,7 @@ class Areachart extends Component {
             .attr('height', height);
 
         const g = svg.append('g')
-            .attr('transform', 'translate(20, 20)');
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
         // area
         g.append("path")
@@ -62,6 +66,17 @@ class Areachart extends Component {
             .attr('cy', d => scaleY(d.y))
             .attr('r', 5)
             .attr('fill', 'steelblue');
+
+        // X Axis
+        g.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + newHeight + ")")
+            .call(d3.axisBottom(scaleX));
+
+        // Y Axis
+        g.append("g")
+            .attr("class", "y axis")
+            .call(d3.axisLeft(scaleY));
     }
 
     render() {

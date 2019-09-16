@@ -13,18 +13,22 @@ class Linechart extends Component {
     createchart() {
         const node = this.node;
         const { width, height, data } = this.props;
-        const margin = { top: 30, right: 20, bottom: 30, left: 50 };
 
-        const newWidth = 600 - margin.left - margin.right;
-        const newHeight = 270 - margin.top - margin.bottom;
+        const margin = { top: 30, right: 20, bottom: 30, left: 50 };
+        const newWidth = width - margin.left - margin.right;
+        const newHeight = height - margin.top - margin.bottom;
 
         data.forEach((d) => {
             d.date = +d.date;
             d.close = +d.close;
         });
 
-        const xScale = d3.scaleLinear().range([0, newWidth]).domain([1, d3.max(data, d => d.date)]);
-        const yScale = d3.scaleLinear().range([newHeight, 0]).domain([0, d3.max(data, d => d.close)]);
+        const xScale = d3.scaleLinear()
+            .range([0, newWidth])
+            .domain([1, d3.max(data, d => d.date)]);
+        const yScale = d3.scaleLinear()
+            .range([newHeight, 0])
+            .domain([0, d3.max(data, d => d.close)]);
 
         const valueline = d3.line()
             .x((d, i) => xScale(d.date))

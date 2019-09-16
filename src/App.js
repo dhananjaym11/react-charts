@@ -107,9 +107,10 @@ const dataArea = [
 ]
 
 const dataStackedBar = [
-  [80, 20, 50],
-  [30, 100, 60],
-  [50, 10, 20]
+  { x: 0, y: [80, 20, 50] },
+  { x: 10, y: [30, 100, 60] },
+  { x: 20, y: [50, 10, 20] },
+  { x: 30, y: [10, 80, 30] }
 ];
 
 const dataMirrorLine = [
@@ -155,10 +156,10 @@ class App extends Component {
           <MultiLinechart width={600} height={300} data={dataMultiLine} />
         </div>
         <div>
-          <Areachart width={240} height={240} data={dataArea} />
+          <Areachart width={300} height={300} data={dataArea} />
         </div>
         <div>
-          <StackedBarchart height={240} data={dataStackedBar} />
+          <StackedBarchart width={200} height={300} data={dataStackedBar} />
         </div>
         <div>
           <MirrorLinechart width={600} height={600} data={dataMirrorLine} />
