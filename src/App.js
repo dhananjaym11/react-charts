@@ -47,8 +47,8 @@ const dataBar = [
 ]
 
 const dataDoubleBar = [
-  [25, 10],
-  [60, 80],
+  [25, 100],
+  [60, 20],
   [10, 50]
 ]
 

@@ -38,3 +38,6 @@ body {
 .area {
   fill: lightsteelblue;
 }
+.bar-text {
+    font-size: 12px;
+}
