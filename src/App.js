@@ -13,6 +13,7 @@ import DoubleBarchart from './charts/DoubleBar';
 import MyLinearBubbleChart from './charts/bubble';
 import MultiLinechart from './charts/MultiLine';
 import Areachart from './charts/Area';
+import StackedBarchart from './charts/StackedBar';
 
 const dataBubble = [
   {
@@ -110,8 +111,14 @@ var dataMultiLine = [
 ];
 
 const dataArea = [
-  {x:0,y:12}, {x:10,y:21}, {x:20,y:18}, {x:30,y:7}, {x:40,y:15}
+  { x: 0, y: 12 }, { x: 10, y: 21 }, { x: 20, y: 18 }, { x: 30, y: 7 }, { x: 40, y: 15 }
 ]
+
+const dataStackedBar = [
+  [80, 20, 50],
+  [30, 100, 60],
+  [50, 10, 20]
+];
 
 class App extends Component {
   render() {
@@ -149,6 +156,9 @@ class App extends Component {
         </div>
         <div>
           <Areachart width={240} height={240} data={dataArea} />
+        </div>
+        <div>
+          <StackedBarchart height={240} data={dataStackedBar} />
         </div>
       </div>
     );
