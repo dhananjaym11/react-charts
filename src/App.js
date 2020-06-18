@@ -15,6 +15,7 @@ import MultiLinechart from './charts/MultiLine';
 import Areachart from './charts/Area';
 import StackedBarchart from './charts/StackedBar';
 import MirrorLinechart from './charts/MirrorLine';
+import StackedAreaChart from './charts/StackedArea';
 
 const dataBubble = [
   {
@@ -121,6 +122,33 @@ const dataMirrorLine = [
   { x: "5", y0: "59", y1: "45" }
 ];
 
+const areaChartdata = [
+  [
+    { x: 1, y: 10, ySum: 10 },
+    { x: 2, y: 15, ySum: 15 },
+    { x: 3, y: 5, ySum: 5 },
+    { x: 4, y: 25, ySum: 25 },
+  ],
+  [
+    { x: 1, y: 15, ySum: 25 },
+    { x: 2, y: 25, ySum: 40 },
+    { x: 3, y: 20, ySum: 25 },
+    { x: 4, y: 5, ySum: 30 },
+  ],
+  [
+    { x: 1, y: 10, ySum: 35 },
+    { x: 2, y: 15, ySum: 55 },
+    { x: 3, y: 5, ySum: 30 },
+    { x: 4, y: 20, ySum: 50 },
+  ]
+];
+const lineData = [
+  { x: 1, y: 45 },
+  { x: 2, y: 45 },
+  { x: 3, y: 45 },
+  { x: 4, y: 45 },
+]
+
 class App extends Component {
   render() {
     return (
@@ -163,6 +191,9 @@ class App extends Component {
         </div>
         <div>
           <MirrorLinechart width={600} height={600} data={dataMirrorLine} />
+        </div>
+        <div>
+          <StackedAreaChart oldWidth={600} oldHeight={400} areaChartdata={areaChartdata} lineData={lineData} />
         </div>
       </div>
     );
